@@ -25,10 +25,9 @@ class Jeu1 extends Fixture
         $disc1->setTitle("Song for the Deaf");
         $disc1->setPicture("https://en.wikipedia.org/wiki/Songs_for_the_Deaf#/media/File:Queens_of_the_Stone_Age_-_Songs_for_the_Deaf.png");
         $disc1->setLabel("Interscope Records");
-
+        $disc1->setYear("1998");
         $manager->persist($disc1);
-
-        $artist1->addDisc($disc1);
+        $disc1->setArtist($artist1);
 
         $manager->flush();
     }

@@ -10,10 +10,10 @@
 
     <div class="row">
         <div class="col-9 mx-auto mb-2 mt-4">
-            {{ form_row(form.objet) }}
+            {{ form_row(form.objet, "Mon libellé a été modifié") }}
         </div>
         <div class="col-9 mx-auto mb-2">
-            {{ form_row(form.email) }}
+            {{ form_row(form.email, {'attr': {'class': 'btn-light'}}) }}
         </div>
         <div class="col-9 mx-auto mb-2">
             {{ form_row(form.message) }}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<form action="{{ url('admin_post_delete', { id: post.id }) }}" method="post">
+    {# l'argument de la méthode csrf_token() est une chaîne de caractère aléatoire qui sert à générer le token  #}
+
+    <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}"/>
+
+    <button type="submit">Delete item</button>
+</form>
+{% endblock %}

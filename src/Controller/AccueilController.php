@@ -10,9 +10,11 @@ class AccueilController extends AbstractController
 {
     #[Route('/accueil', name: 'app_accueil', methods: ['GET'])]
     public function index(): Response
-    {
+    { 
+        $form = $this->createForm(ContactFormType ::class);
         return $this->render('accueil/accueil.html.twig', [
              'controller_name' => 'AccueilController',
+             'form' => $form
         ]);
     }
 }

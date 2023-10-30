@@ -7,10 +7,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'app_contact', )]
+    #[Route('/contact', name: 'app_contact',)]
     public function index(Request $request): Response
     {
         $form = $this->createForm(ContactFormType::class);
@@ -20,8 +21,9 @@ class ContactController extends AbstractController
         // à la méthode render
 
         return $this->render('contact/contact.html.twig', [
-                // 'form' => $form->createView(),
-                'form' => $form
+            // 'form' => $form->createView(),
+            'form' => $form
         ]);
     }
+
 }

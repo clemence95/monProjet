@@ -32,7 +32,7 @@ class AccueilController extends AbstractController
 
         $artistes = $this->artistRepo->findAll();
 
-        return $this->render('accueil/index.html.twig', [
+        return $this->render('accueil/accueil.html.twig', [
             'controller_name' => 'AccueilController',
             //on va envoyer à la vue notre variable qui stocke un tableau d'objets $artistes (c'est-à-dire tous les artistes trouvés dans la base de données)
             'artistes' => $artistes

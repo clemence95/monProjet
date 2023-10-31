@@ -20,21 +20,36 @@ class ArtistRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Artist::class);
     }
+    // public function getSomeArtists($name)
+    // {
+    //     //$name est un paramètre qui pour cet exemple a come valeur "Neil";
+    //     $entityManager = $this->getEntityManager(); //on instancie l'entity manager
+    
+    //     $query = $entityManager->createQuery( //on crée la requête 
+    //         'SELECT a
+    //         FROM App\Entity\Artist a
+    //         WHERE a.artist_name LIKE :name'
+    //     )->setParameter('name', '%' . $name . '%');
+    
+    //     // retourne un tableau d'objets de type Artist
+    //     return $query->getResult();
+    
+    // }
+
     public function getSomeArtists($name)
-    {
-        //$name est un paramètre qui pour cet exemple a come valeur "Neil";
-        $entityManager = $this->getEntityManager(); //on instancie l'entity manager
-    
-        $query = $entityManager->createQuery( //on crée la requête 
-            'SELECT a
-            FROM App\Entity\Artist a
-            WHERE a.artist_name LIKE :name'
-        )->setParameter('name', '%' . $name . '%');
-    
-        // retourne un tableau d'objets de type Artist
-        return $query->getResult();
-    
-    }
+{
+        //$name est un paramètre qui pour cet exemple a comme valeur "Neil";
+
+        $qb = $this->createQueryBuilder('a');
+        $qb
+            ->andWhere('a.artist_name like :name') //le `placeholder, comme en PDO!
+            ->setParameter('name', '%'.$name.'%')
+            ->orderBy('a.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery();
+
+            return $qb->getQuery()->getResult();
+    }  
 
 //    /**
 //     * @return Artist[] Returns an array of Artist objects

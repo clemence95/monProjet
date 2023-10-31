@@ -2,33 +2,29 @@
 
 namespace App\Controller;
 
-use SebastianBergmann\Template\Template;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Mime\Part\DataPart;
-use Symfony\Component\Mime\Part\File;
-
 
 class MailerController extends AbstractController
 {
-    
-    #[Route('/email', name: 'app_mailer')]
+    #[Route('/email')]
     public function sendEmail(MailerInterface $mailer): Response
     {
         try {
-            
             $email = (new TemplatedEmail())
-                ->from('tututoto@gmail.com')
-                ->to('test@example.com')
+                ->from(new Address('hello@example.com', 'Your Name'))
+                ->to(new Address('you@example.com', 'Recipient Name'))
                 ->subject('Time for Symfony Mailer!')
-                ->text('Sending emails is fun again!')
-                ->htmlTemplate('mailer/index.html.twig'); 
+                ->htmlTemplate('mailer/index.html.twig')
+                ->context([
+                    'expiration_date' => new \DateTime('+7 days'),
+                    'username' => 'foo',
+                ]);
 
-            ;
             $mailer->send($email);
 
             return new Response('Email sent successfully');

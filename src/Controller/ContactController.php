@@ -37,6 +37,7 @@ class ContactController extends AbstractController
                     'user_email' => $data->getEmail(), // Accédez à la propriété 'user_email' de l'objet Contact
                     'subject' => $data->getObjet(),
                     'message' => $data->getMessage(), // Accédez à la propriété 'message' de l'objet Contact
+                  
                 ]);
 
             // Envoyez l'e-mail
@@ -52,6 +53,7 @@ class ContactController extends AbstractController
 
             // Redirection vers la page d'accueil
             return $this->redirectToRoute('app_accueil');
+            
         }
 
         return $this->render('contact/contact.html.twig', [
